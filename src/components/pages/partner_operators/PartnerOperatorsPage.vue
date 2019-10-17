@@ -7,18 +7,26 @@
             >
                 <v-card>
                     <v-card-title>
-                        <v-text-field
-                            v-model="search"
-                            append-icon="mdi-magnify"
-                            label="Search"
-                            single-line
-                            hide-details
-                        ></v-text-field>
-                        <v-spacer></v-spacer>
-                        <v-btn color="primary">
-                            <v-icon>mdi-plus</v-icon>
-                            Create New
-                        </v-btn>
+                        <v-row>
+                            <v-col
+                                cols="12"
+                                class="col-sm-12 col-md-6 col-lg-6 col-xl-6"
+                            >
+                                <v-text-field
+                                    v-model="search"
+                                    append-icon="mdi-magnify"
+                                    label="Search"
+                                    single-line
+                                    hide-details
+                                ></v-text-field>
+                            </v-col>
+                            <v-col
+                                cols="12"
+                                class="col-sm-12 col-md-6 col-lg-6 col-xl-6"
+                            >
+                                <create-partner-operators-dialog></create-partner-operators-dialog>
+                            </v-col>
+                        </v-row>
                     </v-card-title>
                     <v-data-table
                         :headers="headers"
@@ -34,6 +42,7 @@
 </template>
 
 <script>
+const CreatePartnerOperatorsDialog = () => import('./dialogs/CreatePartnerOperatorsDialog.vue');
 
 const defaultState = () => {
     return {
@@ -54,6 +63,9 @@ const defaultState = () => {
 
 //for testing purpose only
 export default {
+    components: {
+        CreatePartnerOperatorsDialog
+    },
     data: defaultState,
     destroyed(){
         //defaultState();

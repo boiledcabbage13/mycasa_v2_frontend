@@ -4,6 +4,7 @@
         clipped
         temporary
         app
+        class="app"
     >
         <v-list 
             v-for="(item, key) in items"
@@ -53,6 +54,7 @@ import { NAVIGATION_DRAWER_EVENT_BUS } from './js/NavigationDrawerEventBus'
 
 export default {
     data: () => ({
+        iconColor: 'warning',
         showDrawer : false,
         items:[
             { icon: 'mdi-view-dashboard-outline', text:'Dashboard', path:'/dashboard', role:''},

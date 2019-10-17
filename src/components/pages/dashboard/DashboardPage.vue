@@ -1,58 +1,46 @@
 <template>
     <v-container >
         <page-title :title="pageTitle"></page-title>
-        <v-row class="mx-auto">
+        <v-row>
+            <v-col>
+                <date-range-dialog></date-range-dialog>
+            </v-col>
+        </v-row>
+        <v-row :class="[breakpoints.row.margin]">
             <v-col 
-                class="mx-auto" 
-                cols="12"
-                sm="12" 
-                md="4" 
-                lg="4" 
-                xl="4"
+                :class="[breakpoints.column.spacing, breakpoints.column.size, breakpoints.row.margin]"
             >
                 <v-card>
                     <v-card-title>{{total.sales}} TOTAL SALES</v-card-title>
                 </v-card>
             </v-col>
         </v-row>
-        <v-row class="mx-auto">
+        <v-row :class="[breakpoints.row.margin]">
             <v-col
-                cols="12"
-                sm="12" 
-                md="4" 
-                lg="4" 
-                xl="4"
+                :class="[breakpoints.column.spacing, breakpoints.column.size]"
             >
                 <v-card>
                     <v-card-title>{{total.estimates}} ESTIMATES</v-card-title>
                 </v-card>
             </v-col>
             <v-col
-                cols="12"
-                sm="12" 
-                md="4" 
-                lg="4" 
-                xl="4"
+                :class="[breakpoints.column.spacing, breakpoints.column.size]"
             >
                 <v-card>
                     <v-card-title>{{total.users}} USERS</v-card-title>
                 </v-card>
             </v-col>
             <v-col
-                cols="12"
-                sm="12" 
-                md="4" 
-                lg="4" 
-                xl="4"
+                :class="[breakpoints.column.spacing, breakpoints.column.size]"
             >
                 <v-card>
                     <v-card-title>{{total.closed_job_orders}} CLOSED JOB ORDERS</v-card-title>
                 </v-card>
             </v-col>
         </v-row>
-        <v-row class="mx-auto">
+        <v-row :class="[breakpoints.row.margin]">
             <v-col
-                cols="12"
+                :class="[breakpoints.column.size]"
             >
                 <v-card>
                     <v-card-title>
@@ -94,6 +82,15 @@ const defaultState = () => {
             sales: 0,
             estimates: 0,
             closed_job_orders: 0,
+        },
+        breakpoints: {
+            column: {
+                size: 'col-12',
+                spacing: 'col-sm-12 col-md-4 col-lg-4 col-xl-4'
+            },
+            row: {
+                margin: 'mx-auto'
+            }
         }
     }
 }
@@ -103,6 +100,12 @@ export default {
     data: defaultState,
     destroyed(){
         //defaultState();
+    },
+    mounted() {
+        EventBus.$off('passFilterDate');
+        EventBus.$on('passFilterDate', (data)=> {
+            console.log({data}, 'dashboard')
+        });
     }
 }
 </script>

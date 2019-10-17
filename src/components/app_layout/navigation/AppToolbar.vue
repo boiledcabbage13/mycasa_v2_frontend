@@ -1,14 +1,14 @@
 <template>
-<div>
+<div class="app">
     <app-side-bar></app-side-bar>
     <v-app-bar
-        color="indigo"
         dark
         app
         clipped-left
+        class="theme"
     >
         <v-app-bar-nav-icon @click.stop="toggleNavigationDrawer(!showDrawer)"></v-app-bar-nav-icon>
-        <v-toolbar-title>Application</v-toolbar-title>
+        <v-toolbar-title>{{appName}}</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-btn icon>
             <v-icon>mdi-account-circle</v-icon>
@@ -30,7 +30,8 @@ export default {
         AppSideBar
     },
     data:() => ({
-        showDrawer: false
+        showDrawer: false,
+        appName: "MyCasa"
     }),
     methods:{
         async toggleNavigationDrawer(value){
