@@ -1,5 +1,5 @@
 <template>
-    <v-card>
+    <v-card class="card-custom">
         <v-card-title class="headline">{{title}}</v-card-title>
         <v-divider></v-divider>
         <v-card-text>
@@ -9,7 +9,7 @@
                 lazy-validation
             >
                 <v-row>
-                    <v-col cols="12">Information</v-col>
+                    <v-col cols="12"><span class="sub-header --size --black">Information</span></v-col>
                     <v-divider></v-divider>
                 </v-row>
                 <v-row>
@@ -17,21 +17,21 @@
                         cols="12"
                         class="col-sm-12 col-md-6 col-lg-6 col-xl-6"
                     >
-                        <v-text-field v-model="form.name" placeholder="Name" required :rules="requiredRules"></v-text-field>
+                        <v-text-field v-model="form.name" label="Name" required :rules="requiredRules"></v-text-field>
                     </v-col>
 
                     <v-col
                         cols="12"
                         class="col-sm-12 col-md-6 col-lg-6 col-xl-6"
                     >
-                        <v-text-field v-model="form.title" placeholder="Title" required :rules="requiredRules"></v-text-field>
+                        <v-text-field v-model="form.title" label="Title" required :rules="requiredRules"></v-text-field>
                     </v-col>
 
                     <v-col
                         cols="12"
                         class="col-sm-12 col-md-6 col-lg-6 col-xl-6"
                     >
-                            <v-text-field v-model="form.price" placeholder="Price" required :rules="requiredRules"></v-text-field>
+                            <v-text-field v-model="form.price" label="Price" required :rules="requiredRules"></v-text-field>
                     </v-col>
                          
                     <v-col
@@ -39,14 +39,14 @@
                         class="col-sm-12 col-md-6 col-lg-6 col-xl-6"
                     >
                         <!-- should be select box -->
-                        <v-text-field v-model="form.category" placeholder="Category" required :rules="requiredRules"></v-text-field> 
+                        <v-text-field v-model="form.category" label="Category" required :rules="requiredRules"></v-text-field> 
                     </v-col>  
 
                     <v-col
                         cols="12"
                         class="col-sm-12 col-md-12 col-lg-12 col-xl-12"
                     >
-                        <v-textarea v-model="form.description" placeholder="Description" required :rules="requiredRules"></v-textarea> 
+                        <v-textarea v-model="form.description" label="Description" required :rules="requiredRules"></v-textarea> 
                     </v-col>  
                 </v-row>
             </v-form>

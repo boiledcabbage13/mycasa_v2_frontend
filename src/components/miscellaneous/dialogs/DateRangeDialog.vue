@@ -15,7 +15,7 @@
             persistent
             scrollable
         >
-            <v-card>
+            <v-card class="card-custom">
                 <v-card-title class="headline">{{title}}</v-card-title>
                 <v-divider></v-divider>
 
@@ -30,7 +30,7 @@
                                 >
                                     <v-row>
                                         <v-col>
-                                            <h3>Presets</h3>
+                                            <h3 class="sub-header --black">Presets</h3>
                                         </v-col>
                                     </v-row>
                                     <v-row>

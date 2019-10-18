@@ -1,5 +1,5 @@
 <template>
-    <v-card>
+    <v-card class="card-custom">
         <v-card-title class="headline">{{title}}</v-card-title>
         <v-divider></v-divider>
         <v-card-text>
@@ -9,7 +9,7 @@
                 lazy-validation
             >
                 <v-row>
-                    <v-col cols="12">Information</v-col>
+                    <v-col cols="12"><span class="sub-header --size --black">Information</span></v-col>
                     <v-divider></v-divider>
                 </v-row>
                 <v-row>
@@ -17,28 +17,28 @@
                         cols="12"
                         class="col-sm-12 col-md-6 col-lg-6 col-xl-6"
                     >
-                        <v-text-field v-model="form.firstName" placeholder="First Name" required :rules="requiredRules"></v-text-field>
+                        <v-text-field v-model="form.firstName" label="First Name" required :rules="requiredRules"></v-text-field>
                     </v-col>
 
                     <v-col
                         cols="12"
                         class="col-sm-12 col-md-6 col-lg-6 col-xl-6"
                     >
-                        <v-text-field v-model="form.lastName" placeholder="Last Name" required :rules="requiredRules"></v-text-field>
+                        <v-text-field v-model="form.lastName" label="Last Name" required :rules="requiredRules"></v-text-field>
                     </v-col>
 
                     <v-col
                         cols="12"
                         class="col-sm-12 col-md-6 col-lg-6 col-xl-6"
                     >
-                            <v-text-field v-model="form.contactNumber" placeholder="Contact Number" required :rules="requiredRules"></v-text-field>
+                            <v-text-field v-model="form.contactNumber" label="Contact Number" required :rules="requiredRules"></v-text-field>
                     </v-col>
                          
                     <v-col
                         cols="12"
                         class="col-sm-12 col-md-6 col-lg-6 col-xl-6"
                     >
-                        <v-text-field v-model="form.address" placeholder="Address" required :rules="requiredRules"></v-text-field> 
+                        <v-text-field v-model="form.address" label="Address" required :rules="requiredRules"></v-text-field> 
                     </v-col>  
 
                     <v-col
@@ -68,7 +68,7 @@
                 </v-row>
 
                 <v-row>
-                    <v-col cols="12">Accounts</v-col>
+                    <v-col cols="12" class="sub-header --size --black">Accounts</v-col>
                     <v-divider></v-divider>
                 </v-row>
 
@@ -77,18 +77,18 @@
                         cols="12"
                         class="col-sm-12 col-md-6 col-lg-6 col-xl-6"
                     >
-                        <v-text-field v-model="form.email" placeholder="E-mail" required :rules="requiredRules"></v-text-field> 
+                        <v-text-field v-model="form.email" label="E-mail" required :rules="requiredRules"></v-text-field> 
                     </v-col>
                     <v-col
                         cols="12"
                         class="col-sm-12 col-md-6 col-lg-6 col-xl-6"
                     >
-                        <v-text-field v-model="form.password" placeholder="Password" type="password" required :rules="requiredRules"></v-text-field> 
+                        <v-text-field v-model="form.password" label="Password" type="password" required :rules="requiredRules"></v-text-field> 
                     </v-col>
                 </v-row>
 
                 <v-row>
-                    <v-col cols="12">Branch & Specialty</v-col>
+                    <v-col cols="12" class="sub-header --size --black">Branch & Specialty</v-col>
                     <v-divider></v-divider>
                 </v-row>
 
@@ -98,13 +98,13 @@
                         class="col-sm-12 col-md-6 col-lg-6 col-xl-6"
                     >
                         <!-- Create component that accept just URL and put the return on select box items -->
-                        <v-text-field v-model="form.branch" placeholder="Branch" required :rules="requiredRules"></v-text-field> 
+                        <v-text-field v-model="form.branch" label="Branch" required :rules="requiredRules"></v-text-field> 
                     </v-col>
                     <v-col
                         cols="12"
                         class="col-sm-12 col-md-6 col-lg-6 col-xl-6"
                     >
-                        <v-text-field v-model="form.position" placeholder="Position" required :rules="requiredRules"></v-text-field> 
+                        <v-text-field v-model="form.position" label="Position" required :rules="requiredRules"></v-text-field> 
                     </v-col>
                 </v-row>
             </v-form>

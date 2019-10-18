@@ -2,9 +2,15 @@
     > .theme {
         background-color: #FF6600;
     }
+}
 
-    > .orange {
-        color: #FF6600 !important;
+.card-custom {
+    .sub-header.--size {
+        font-size: 1.5em;
+    }
+    .sub-header.--black {
+        color: black !important;
     }
 }
+
 

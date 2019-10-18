@@ -7,7 +7,7 @@
             >
                 <v-card>
                     <v-card-title>
-                        <v-row>
+                        <v-row class="align-center">
                             <v-col
                                 cols="12"
                                 class="col-sm-12 col-md-6 col-lg-6 col-xl-6"
@@ -24,7 +24,9 @@
                                 cols="12"
                                 class="col-sm-12 col-md-6 col-lg-6 col-xl-6"
                             >
-                                <create-dialog></create-dialog>
+                                <v-row class="justify-end pa-2">
+                                    <create-dialog></create-dialog>
+                                </v-row>
                             </v-col>
                         </v-row>
                     </v-card-title>
@@ -35,6 +37,10 @@
                         class="elevation-1"
                         disable-sort
                     >
+                        <template v-slot:item.show="{ item }">
+                            <v-icon v-if="item.show" color="success">mdi-check-circle</v-icon>
+                            <v-icon v-else color="error">mdi-close-circle</v-icon>
+                        </template>
                         <template v-slot:item.action="{ item }">
                             <create-dialog :button="editDialog.button" title="Edit Ad" :form="item"></create-dialog>
                         </template>
@@ -58,12 +64,19 @@ export default {
         headers: [
           { text: 'Id', value: 'id' },
           { text: 'Image', value: 'image' },
+          { text: 'Show', value: 'show' },
           { text: 'Action', value: 'action' },
         ],
         items: [
             {
                 id: 1,
-                image: 'test.jpg'
+                image: 'test.jpg',
+                show: false
+            },
+            {
+                id: 2,
+                image: 'test2.jpg',
+                show: true
             }
         ],
         editDialog:{
