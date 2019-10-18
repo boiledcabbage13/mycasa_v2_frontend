@@ -17,95 +17,78 @@
                         cols="12"
                         class="col-sm-12 col-md-6 col-lg-6 col-xl-6"
                     >
-                        <v-text-field v-model="form.firstName" placeholder="First Name" required :rules="requiredRules"></v-text-field>
+                        <v-text-field v-model="form.name" placeholder="Name" required :rules="requiredRules"></v-text-field>
                     </v-col>
 
                     <v-col
                         cols="12"
                         class="col-sm-12 col-md-6 col-lg-6 col-xl-6"
                     >
-                        <v-text-field v-model="form.lastName" placeholder="Last Name" required :rules="requiredRules"></v-text-field>
+                        <year-select-box
+                            v-model="form.year"
+                            label="Year"
+                            required 
+                            :rules="requiredRules"
+                        >
+                        </year-select-box>
+                    </v-col>  
+
+                    <v-col
+                        cols="12"
+                        class="col-sm-12 col-md-6 col-lg-6 col-xl-6"
+                    >
+                        <v-text-field v-model="form.brand" placeholder="Brand" required :rules="requiredRules"></v-text-field>
                     </v-col>
 
                     <v-col
                         cols="12"
                         class="col-sm-12 col-md-6 col-lg-6 col-xl-6"
                     >
-                            <v-text-field v-model="form.contactNumber" placeholder="Contact Number" required :rules="requiredRules"></v-text-field>
+                            <v-text-field v-model="form.model" placeholder="Model" required :rules="requiredRules"></v-text-field>
                     </v-col>
                          
                     <v-col
                         cols="12"
                         class="col-sm-12 col-md-6 col-lg-6 col-xl-6"
                     >
-                        <v-text-field v-model="form.address" placeholder="Address" required :rules="requiredRules"></v-text-field> 
+                        <v-text-field v-model="form.make" placeholder="Make" required :rules="requiredRules"></v-text-field> 
                     </v-col>  
 
                     <v-col
                         cols="12"
                         class="col-sm-12 col-md-6 col-lg-6 col-xl-6"
                     >
-                        <gender-select-box
-                            v-model="form.gender"
-                            label="Gender"
-                            required 
-                            :rules="requiredRules"
-                        >
-                        </gender-select-box>
+                        <v-text-field v-model="form.price" placeholder="Price" required :rules="requiredRules"></v-text-field> 
                     </v-col>  
 
                     <v-col
                         cols="12"
                         class="col-sm-12 col-md-6 col-lg-6 col-xl-6"
                     >
-                        Birthdate
-                        <v-date-picker 
-                            v-model="form.birthdate" 
-                            no-title full-width 
-                            :max="new Date().toISOString().substr(0,10)"
-                        ></v-date-picker>
+                        <v-text-field v-model="form.body" placeholder="Body" required :rules="requiredRules"></v-text-field> 
                     </v-col>  
-                </v-row>
 
-                <v-row>
-                    <v-col cols="12">Accounts</v-col>
-                    <v-divider></v-divider>
-                </v-row>
-
-                <v-row>
                     <v-col
                         cols="12"
                         class="col-sm-12 col-md-6 col-lg-6 col-xl-6"
                     >
-                        <v-text-field v-model="form.email" placeholder="E-mail" required :rules="requiredRules"></v-text-field> 
-                    </v-col>
-                    <v-col
-                        cols="12"
-                        class="col-sm-12 col-md-6 col-lg-6 col-xl-6"
-                    >
-                        <v-text-field v-model="form.password" placeholder="Password" type="password" required :rules="requiredRules"></v-text-field> 
-                    </v-col>
-                </v-row>
+                        <!-- should be select box -->
+                        <v-text-field v-model="form.category" placeholder="Category" required :rules="requiredRules"></v-text-field> 
+                    </v-col>  
 
-                <v-row>
-                    <v-col cols="12">Branch & Position</v-col>
-                    <v-divider></v-divider>
-                </v-row>
+                    <v-col
+                        cols="12"
+                        class="col-sm-12 col-md-6 col-lg-6 col-xl-6"
+                    >
+                        <v-text-field v-model="form.code" placeholder="Code" required :rules="requiredRules"></v-text-field> 
+                    </v-col>
 
-                <v-row>
                     <v-col
                         cols="12"
-                        class="col-sm-12 col-md-6 col-lg-6 col-xl-6"
+                        class="col-sm-12 col-md-12 col-lg-12 col-xl-12"
                     >
-                        <!-- Create component that accept just URL and put the return on select box items -->
-                        <v-text-field v-model="form.branch" placeholder="Branch" required :rules="requiredRules"></v-text-field> 
-                    </v-col>
-                    <v-col
-                        cols="12"
-                        class="col-sm-12 col-md-6 col-lg-6 col-xl-6"
-                    >
-                        <v-text-field v-model="form.position" placeholder="Position" type="password" required :rules="requiredRules"></v-text-field> 
-                    </v-col>
+                        <v-textarea v-model="form.description" placeholder="Description" required :rules="requiredRules"></v-textarea> 
+                    </v-col>  
                 </v-row>
             </v-form>
         </v-card-text>
@@ -118,10 +101,11 @@
 </template>
 
 <script>
-const GenderSelectBox = () => import('../../../miscellaneous/selects/GenderSelectBox.vue')
+const YearSelectBox = () => import('../../../miscellaneous/selects/YearSelectBox.vue');
+
 export default {
     components: {
-        GenderSelectBox
+        YearSelectBox
     },
     data: () => ({
         valid: true,
@@ -133,22 +117,20 @@ export default {
     props: {
         title: {
             type: String,
-            default: 'Create Partner Operators'
+            required: true
         },
         formInDialog: {
-            // true = CreatePartnerOperatorsForm.vue is on v-dialog
+            // true = CreateFrom.vue is on v-dialog
             type: Boolean,
             default: true
         },
         eventName: {
             type: String,
-            default: 'closeDialogPartnerOperators'
+            default: 'closeDialog'
         },
         form: {
             type: Object,
-            default: () => {
-                return {}
-            }
+            required: true
         }
     },
     methods: {
@@ -163,9 +145,6 @@ export default {
             this.dialog = false;
             this.$emit(this.eventName, this.dialog);
         }
-    },
-    mounted(){
-        this.form.birthdate = new Date().toISOString().substr(0,10);
     }
 }
 </script>

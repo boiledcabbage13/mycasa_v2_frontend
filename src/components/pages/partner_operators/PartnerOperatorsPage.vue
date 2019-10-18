@@ -24,7 +24,7 @@
                                 cols="12"
                                 class="col-sm-12 col-md-6 col-lg-6 col-xl-6"
                             >
-                                <create-partner-operators-dialog></create-partner-operators-dialog>
+                                <create-dialog></create-dialog>
                             </v-col>
                         </v-row>
                     </v-card-title>
@@ -34,7 +34,11 @@
                         :items-per-page="5"
                         class="elevation-1"
                         disable-sort
-                    ></v-data-table>
+                    >
+                        <template v-slot:item.action="{ item }">
+                            <create-dialog :button="editDialog.button" title="Edit Partner Operator" :form="item"></create-dialog>
+                        </template>
+                    </v-data-table>
                 </v-card>  
             </v-col>
         </v-row>
@@ -42,7 +46,7 @@
 </template>
 
 <script>
-const CreatePartnerOperatorsDialog = () => import('./dialogs/CreatePartnerOperatorsDialog.vue');
+const CreateDialog = () => import('./dialogs/CreateDialog.vue');
 
 const defaultState = () => {
     return {
@@ -50,21 +54,44 @@ const defaultState = () => {
         search: '',
         headers: [
           { text: 'Id', value: 'id' },
-          { text: 'Full Name', value: 'fullname' },
+          { text: 'First Name', value: 'firstName' },
+          { text: 'Last Name', value: 'lastName' },
           { text: 'Position', value: 'position' },
           { text: 'E-mail', value: 'email' },
-          { text: 'Mobile Number', value: 'mobile_number' },
+          { text: 'Contact Number', value: 'contactNumber' },
           { text: 'Branch', value: 'branch' },
-          { text: 'Date Created', value: 'date_created' },
+          { text: 'Date Created', value: 'dateCreated' },
+          { text: 'Actions', value: 'action' },
         ],
-        items: [],
+        items: [
+            {
+                id: '1',
+                firstName: 'Edrich',
+                lastName: 'Bonifacio',
+                position: 'Developer',
+                email: 'dev@dev.com',
+                contactNumber: '0999222499',
+                branch: 'Mandaluyong',
+                dateCreated: '2019-10-18',
+                gender: 'Male',
+                address: 'Mandaluyong',
+                password: 'test',
+                birthdate: '2019-08-13'
+            }
+        ],
+        editDialog:{
+            button:{
+                isIcon: true,
+                icon: 'mdi-pencil'
+            }
+        }
     }
 }
 
 //for testing purpose only
 export default {
     components: {
-        CreatePartnerOperatorsDialog
+        CreateDialog
     },
     data: defaultState,
     destroyed(){
