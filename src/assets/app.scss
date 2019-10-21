@@ -13,4 +13,24 @@
     }
 }
 
+.chat-balloon {
+    > .-gray {
+        padding: 10px;
+        display:inline-block;
+        border-radius: 25px;
+        border: 1px solid #c5c4c4;
+        background-color: #F1F0F0;
+        color: black;
+    }
+
+    > .-blue {
+        padding: 10px;
+        display:inline-block;
+        border-radius: 25px;
+        border: 1px solid #066fd1;
+        background-color: #0099FF;
+        color: white;
+    }
+}
+
 

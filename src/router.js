@@ -19,6 +19,7 @@ export default new Router({
       redirect: '/dashboard',
       children: [
         { path: '/dashboard', name: 'dashboard', component: () => import('./components/pages/dashboard/DashboardPage.vue')},
+        { path: '/profile', name: 'profile', component: () => import('./components/pages/profile/ProfilePage.vue')},
         { path: '/messages', name: 'messages', component: () => import('./components/pages/message/MessagePage.vue')},
         { path: '/cost-estimates', name: 'cost-estimates', component: () => import('./components/pages/cost_estimates/CostEstimatesPage.vue')},
         { path: '/bookings', name: 'bookings', component: () => import('./components/pages/bookings/BookingsPage.vue')},

@@ -10,10 +10,10 @@
         <v-app-bar-nav-icon @click.stop="toggleNavigationDrawer(!showDrawer)"></v-app-bar-nav-icon>
         <v-toolbar-title>{{appName}}</v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-btn icon>
+        <v-btn icon @click="mixins_goToPage('/profile')">
             <v-icon>mdi-account-circle</v-icon>
         </v-btn>
-        <v-btn icon>
+        <v-btn icon @click="mixins_goToPage('/')">
             <v-icon>mdi-logout</v-icon>
         </v-btn>
     </v-app-bar>
