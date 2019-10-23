@@ -16,7 +16,7 @@
                     </v-tab>
                 </v-tabs>
 
-                <v-tabs-items v-model="tab">
+                <v-tabs-items v-model="tab" >
                     <v-tab-item
                         v-for="(item, key) in tabItems"
                         :key="key"
@@ -24,10 +24,11 @@
                         <v-card max-height="auto" class="pa-1">
                             <v-card-text>
                                 <v-row no-gutters>
-                                    <v-col cols="3">
+                                    <v-col cols="3" >
                                         <v-list 
                                             two-line 
                                             max-height="100vh" class="overflow-y-auto"
+                                            id="scroll-lists"
                                         >
                                             <v-list-item-group color="primary">
                                                 <v-list-item v-for="(message, index) in messages" :key="index">
@@ -40,18 +41,22 @@
                                         </v-list>
                                     </v-col>
                                     <v-col cols="9">
-                                        <v-list max-height="100vh" class="overflow-y-auto pa-2">
+                                        <v-list max-height="100vh" class="overflow-y-auto pa-2" id="scroll-chats">
                                             <v-list-item-content v-for="(chat, index) in chats" :key="index">
                                                 <v-row>
                                                     <v-col cols="12" v-if="chat.admin" class="text-right chat-balloon">
                                                         <div class="-blue">
-                                                            {{chat.text}}
+                                                            {{ chat.text }}
                                                         </div>
+                                                        <br>
+                                                        <small class="text--gray">{{ chat.timestamps }}</small>
                                                     </v-col>
                                                     <v-col cols="12" v-else class="text-left chat-balloon">
                                                         <div class="-gray">
-                                                            {{chat.text}}
+                                                            {{ chat.text }}
                                                         </div>
+                                                        <br>
+                                                        <small class="text--gray"> {{ chat.timestamps }}</small>
                                                     </v-col>
                                                 </v-row>
                                             </v-list-item-content>
@@ -177,11 +182,11 @@ export default {
         showThread(id) {
             this.showChat = true;
             let chats = [
-                {text: 'Hi!', admin: true},
-                {text: 'Hello!', admin: false},
-                {text: 'Test!', admin: true},
-                {text: 'Testing!', admin: true},
-                {text: 'Testing Done!', admin: false},
+                {text: 'Hi!', timestamps: new Date(), admin: true},
+                {text: 'Hello!', timestamps: new Date(), admin: false},
+                {text: 'Test!', timestamps: new Date(), admin: true},
+                {text: 'Testing!', timestamps: new Date(), admin: true},
+                {text: 'Testing Done!', timestamps: new Date(), admin: false},
             ];
 
             this.chats = chats
@@ -195,7 +200,35 @@ export default {
             }
 
             this.text = '';
+        },
+        test(){
+            let qwe = document.querySelector('#scroll-lists');
+            console.log({qwe})
+        },
+        test1(){
+            console.log('asd')
+        },
+        // onScroll() {
+        //     console.log('test')
+        // },
+        onScroll(){
+            window.addEventListener('scroll', () => {
+                let qwe = document.querySelector('#scroll-lists');
+                qwe.onscroll = () => {
+                    this.test()
+                }
+
+                let qwer = document.querySelector('#scroll-chats');
+                qwer.onscroll = () => {
+                    this.test1()
+                }
+
+            })
+
         }
+    },
+    created(){
+        this.onScroll();
     }
 }
 </script>

@@ -6,7 +6,7 @@
                 <date-range-dialog></date-range-dialog>
             </v-col>
         </v-row>
-        <v-row class="mx-auto">
+        <v-row class="mx-auto text--wrap">
             <v-col
                 cols="12"
                 sm="12"
@@ -19,7 +19,7 @@
                         SERVICE RATING OVERALL AVERAGE
                     </v-card-title>
                     <v-card-text>
-                        <v-row>
+                        <v-row class="text--wrap">
                             <v-col
                                 cols="12"
                                 sm="6"
