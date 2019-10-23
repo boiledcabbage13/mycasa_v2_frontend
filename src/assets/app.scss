@@ -4,6 +4,22 @@
     }
 }
 
+.app-theme {
+    background-color: #FF6600 !important;
+}
+
+.app__icon--primary, .app__icon--primary .v-list-group__header .v-list-group__header__prepend-icon .v-icon {
+    color: #FF6600 !important;
+}
+
+.app__icon--primary-darker {
+    color: #c95000 !important;
+}
+
+.app-theme--darker {
+    background-color: #c95000 !important;
+}
+
 .card-custom {
     .sub-header.--size {
         font-size: 1.5em;
@@ -43,5 +59,10 @@
 
 .text--wrap {
     word-wrap: break-word;
+}
+
+.app-button--primary {
+    background-color: #FF6600 !important;
+    color: white !important;
 }
 

@@ -15,7 +15,7 @@
                             hide-details
                         ></v-text-field>
                         <v-spacer></v-spacer>
-                        <v-btn color="primary">
+                        <v-btn class="app-button--primary">
                             <v-icon>mdi-plus</v-icon>
                             Create New
                         </v-btn>

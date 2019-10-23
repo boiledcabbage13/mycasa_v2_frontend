@@ -62,7 +62,7 @@
                         disable-sort
                     >
                         <template v-slot:item.action="{ item }">
-                            <v-btn color="primary">View</v-btn>
+                            <v-btn class="app-button--primary">View</v-btn>
                         </template>
                     </v-data-table>
                 </v-card>  
@@ -87,6 +87,8 @@
 </template>
 
 <script>
+
+import Repository from '@/repository';
 
 const defaultState = () => {
     return {
@@ -142,10 +144,18 @@ const defaultState = () => {
 //for testing purpose only
 export default {
     data: defaultState,
+    methods: {
+        async testAxios() {
+            const data = await Repository.get('/test');
+            console.log({data})
+        }
+    },
     destroyed(){
         //defaultState();
     },
     mounted() {
+        this.testAxios();
+
         EventBus.$off('passFilterDate');
         EventBus.$on('passFilterDate', (data)=> {
             console.log({data}, 'dashboard')

@@ -1,5 +1,5 @@
 <template>
-    <v-card class="card-custom">
+    <v-card class="card-custom" >
         <v-card-title class="headline">{{title}}</v-card-title>
         <v-divider></v-divider>
         <v-card-text>
@@ -112,7 +112,7 @@
         <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn v-if="formInDialog" text color="error" @click="closeDialog()">Close</v-btn>
-            <v-btn color="primary" :disabled="!valid" @click="submit()">Submit</v-btn>
+            <v-btn class="app-button--primary" :disabled="!valid" @click="submit()">Submit</v-btn>
         </v-card-actions>
     </v-card>
 </template>
@@ -167,6 +167,6 @@ export default {
         if(!this.form.birthdate) {
             this.form.birthdate = new Date().toISOString().substr(0,10);
         }
-    }
+    },
 }
 </script>

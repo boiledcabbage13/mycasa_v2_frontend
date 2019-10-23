@@ -1,7 +1,7 @@
 <template>
 	<v-content>
 		<v-container
-			class="fill-height"
+			class="fill-height app-theme--darker"
 			fluid
 		>
 			<v-row
@@ -13,13 +13,20 @@
 					sm="8"
 					md="4"
 				>
+					<v-img 
+						:src="require('../../assets/logo/mycasalogo.png')" 
+						contain 
+						height="100" 
+						position="center" 
+						class="ma-4"
+					/>
 					<v-card class="elevation-12">
 						<v-toolbar
-							color="primary"
 							dark
 							flat
+							class="app-theme"
 						>
-							<v-toolbar-title>Login form</v-toolbar-title>
+							<v-toolbar-title>Login:</v-toolbar-title>
 						</v-toolbar>
 						<v-card-text>
 							<v-form>
@@ -41,7 +48,7 @@
 						</v-card-text>
 						<v-card-actions>
 							<v-spacer></v-spacer>
-							<v-btn color="primary" @click="toDashboard()">Login</v-btn>
+							<v-btn class="app-button--primary" @click="toDashboard()">Login</v-btn>
 						</v-card-actions>
 					</v-card>
 				</v-col>
@@ -54,7 +61,7 @@
   export default {
 	  methods:{
 		  toDashboard(){
-			  this.$router.push('/dashboard');
+			this.$router.push('/dashboard');
 		  }
 	  }
   }

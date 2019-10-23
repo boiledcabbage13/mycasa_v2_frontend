@@ -13,6 +13,7 @@
             v-model="dialog"
             persistent
             scrollable 
+            max-width="50%"
         >   
             <update-password-form @closeDialog="closeDialog($event)"></update-password-form>
         </v-dialog>

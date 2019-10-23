@@ -21,7 +21,7 @@
         <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn v-if="formInDialog" text color="error" @click="closeDialog()">Close</v-btn>
-            <v-btn color="primary" :disabled="!valid" @click="submit()">Submit</v-btn>
+            <v-btn class="app-button--primary" :disabled="!valid" @click="submit()">Submit</v-btn>
         </v-card-actions>
     </v-card>
 </template>

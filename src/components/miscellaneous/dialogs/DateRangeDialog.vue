@@ -82,7 +82,7 @@
 
                     <v-btn
                         @click="setDateFilter()"
-                        color="primary"
+                        class="app-button--primary"
                     >
                         Apply
                     </v-btn>

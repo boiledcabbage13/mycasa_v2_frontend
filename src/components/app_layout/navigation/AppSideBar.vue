@@ -15,6 +15,7 @@
                 v-if="item.children"
                 :prepend-icon="item.icon"
                 :value="false"
+                class="app__icon--primary"
             >
                 <template v-slot:activator>
                     <v-list-item-title>{{item.text}}</v-list-item-title>
@@ -27,7 +28,7 @@
                 >
                     <v-list-item-title>{{child.text}}</v-list-item-title>
                     <v-list-item-icon>
-                        <v-icon>{{child.icon}}</v-icon>
+                        <v-icon class="app__icon--primary-darker">{{child.icon}}</v-icon>
                     </v-list-item-icon>
                 </v-list-item>
             </v-list-group>
@@ -37,7 +38,7 @@
                 @click="mixins_goToPage(item.path)"
             >
                 <v-list-item-action>
-                    <v-icon>{{item.icon}}</v-icon>
+                    <v-icon class="app__icon--primary">{{item.icon}}</v-icon>
                 </v-list-item-action>
                 <v-list-item-content>
                     <v-list-item-title>{{item.text}}</v-list-item-title>

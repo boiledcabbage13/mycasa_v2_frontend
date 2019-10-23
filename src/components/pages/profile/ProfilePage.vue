@@ -1,5 +1,5 @@
 <template>
-    <v-card class="card-custom">
+    <v-card class="card-custom ma-4">
         <v-card-title class="headline">{{title}}</v-card-title>
         <v-divider></v-divider>
         <v-card-text>
@@ -93,7 +93,7 @@
             <v-spacer></v-spacer>
             <update-password-dialog></update-password-dialog>
             <confirm-update-profile-dialog></confirm-update-profile-dialog>
-            <v-btn color="primary" :disabled="!valid" @click="submit()">Submit</v-btn>
+            <v-btn class="app-button--primary" :disabled="!valid" @click="submit()">Submit</v-btn>
         </v-card-actions>
     </v-card>
 </template>

@@ -13,6 +13,7 @@
             v-model="dialog"
             persistent
             scrollable 
+            max-width="50%"
         >   
             <confirm-update-profile-form @closeDialog="closeDialog($event)"></confirm-update-profile-form>
         </v-dialog>
