@@ -8,7 +8,7 @@
                 <v-card>
                     <v-card-title>
                         <v-row class="align-center">
-                            <v-col
+                            <!-- <v-col
                                 cols="12"
                                 class="col-sm-12 col-md-6 col-lg-6 col-xl-6"
                             >
@@ -19,10 +19,9 @@
                                     single-line
                                     hide-details
                                 ></v-text-field>
-                            </v-col>
+                            </v-col> -->
                             <v-col
                                 cols="12"
-                                class="col-sm-12 col-md-6 col-lg-6 col-xl-6"
                             >
                                 <v-row class="justify-end pa-2">
                                     <create-dialog></create-dialog>

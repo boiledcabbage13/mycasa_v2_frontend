@@ -92,7 +92,7 @@
         <v-card-actions>
             <v-spacer></v-spacer>
             <update-password-dialog></update-password-dialog>
-            <confirm-update-profile-dialog></confirm-update-profile-dialog>
+            <confirm-update-profile-dialog class="px-2"></confirm-update-profile-dialog>
             <v-btn class="app-button--primary" :disabled="!valid" @click="submit()">Submit</v-btn>
         </v-card-actions>
     </v-card>

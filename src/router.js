@@ -32,8 +32,13 @@ export default new Router({
         { path: '/products', name: 'products', component: () => import('./components/pages/products/ProductsPage.vue')},
         { path: '/services', name: 'services', component: () => import('./components/pages/services/ServicesPage.vue')},
         { path: '/loyalty', name: 'loyalty', component: () => import('./components/pages/loyalty/LoyaltyPage.vue')},
-        { path: '/settings/ads-management', name: 'ads-management', component: () => import('./components/pages/settings/ads_management/AdsManagement.vue')},
+        { path: '/settings/ads-management', name: 'ads-management', component: () => import('./components/pages/settings/ads_management/AdsManagementPage.vue')},
       ]
-    }
+    },
+    {
+      path: '/app-styles',
+      name: 'app-styles',
+      component: () => import('./components/pages/AppStyles.vue')
+    },
   ]
 })

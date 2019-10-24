@@ -14,6 +14,7 @@
                         class="col-sm-12 col-md-12 col-lg-12 col-xl-12"
                     >
                         <v-file-input label="File input" v-model="form.file" required :rules="requiredRules"></v-file-input>
+                        <v-switch v-model="form.show" label="Show"></v-switch>
                     </v-col>
                 </v-row>
             </v-form>

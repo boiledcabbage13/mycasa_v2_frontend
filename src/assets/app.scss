@@ -66,3 +66,19 @@
     color: white !important;
 }
 
+.text__quote {
+    color: white;
+    font-weight: bolder;
+    text-align:center;
+    font-style: italic;
+}
+
+.text__title {
+    &.-size {
+        font-size:2em;
+    }
+    &.-nowrap {
+        white-space:nowrap;
+    }
+}
+

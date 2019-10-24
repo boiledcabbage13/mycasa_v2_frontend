@@ -20,6 +20,7 @@
 						position="center" 
 						class="ma-4"
 					/>
+					<p class="text__quote">{{ quote }}</p>
 					<v-card class="elevation-12">
 						<v-toolbar
 							dark
@@ -58,11 +59,14 @@
 </template>
 
 <script>
-  export default {
-	  methods:{
-		  toDashboard(){
-			this.$router.push('/dashboard');
-		  }
-	  }
-  }
+export default {
+	data: () => ({
+		quote: "IT'S ABOUT TIME CAR MAINTENANCE BECAME CONVENIENT"
+	}),
+	methods:{
+		toDashboard(){
+		this.$router.push('/dashboard');
+		}
+	}
+}
 </script>

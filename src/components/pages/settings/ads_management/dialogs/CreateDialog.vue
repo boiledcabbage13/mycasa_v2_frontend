@@ -13,6 +13,7 @@
             v-model="dialog"
             persistent
             scrollable 
+            max-width="50%"
         >
             <create-form @closeDialog="closeDialog($event)" :title="title" :form="form"></create-form>        </v-dialog>
     </div>

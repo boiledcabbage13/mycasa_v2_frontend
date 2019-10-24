@@ -14,6 +14,7 @@
             v-model="dialog"
             persistent
             scrollable
+            max-width="50%"
         >
             <v-card class="card-custom">
                 <v-card-title class="headline">{{title}}</v-card-title>

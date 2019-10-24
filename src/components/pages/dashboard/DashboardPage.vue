@@ -73,13 +73,50 @@
                 class="col-sm-12 col-md-12 col-lg-6 col-xl-6"
             >
                 <v-card>
-                    <v-date-picker
-                        v-model="date1"
-                        no-title 
-                        full-width 
-                        :events="arrayEvents"
-                        event-color="green lighten-1"
-                    ></v-date-picker>
+                    <v-row 
+                        class="pb-3"
+                    >
+                        <v-col 
+                            align="center"
+                            justify="center"
+                        >
+                            <v-btn
+                                class="app-button--primary"
+                                @click="previousMonth"
+                            >
+                                <v-icon dark>mdi-chevron-left</v-icon>
+                            </v-btn>
+                        </v-col>
+                        <v-col 
+                            align="center"
+                            justify="center"
+                        >
+                            <p class="text--bold text__title -size -nowrap"> {{ now | getCurrentMonthText }} </p>
+                        </v-col>
+                        <v-col 
+                            align="center"
+                            justify="center"
+                        >
+                            <v-btn
+                                class="app-button--primary"
+                                @click="nextMonth"
+                            >
+                                <v-icon dark>mdi-chevron-right</v-icon>
+                            </v-btn>
+                        </v-col>
+                    </v-row>
+                    <v-sheet height="400">
+                        <v-calendar
+                            v-model="now"
+                            ref="calendar"
+                            :now="now"
+                            :events="events"
+                            :event-color="getEventColor"
+                            color="primary"
+                            type="month"
+                            @change="updateRange"
+                        />
+                    </v-sheet>
                 </v-card>  
             </v-col>
         </v-row>
@@ -90,19 +127,13 @@
 
 import Repository from '@/repository';
 
-const defaultState = () => {
-    return {
+export default {
+    data: () => ({
         pageTitle: 'Dashboard',
         headers: [
-        //   { text: 'CE#', value: 'ce' },
           { text: 'Client', value: 'client' },
-        //   { text: 'Service', value: 'service' },
           { text: 'Vehicle', value: 'vehicle' },
           { text: 'Schedule', value: 'schedule' },
-        //   { text: 'Price', value: 'price' },
-        //   { text: 'Address', value: 'address' },
-        //   { text: 'Technician', value: 'technician' },
-        //   { text: 'PO', value: 'po' },
           { text: 'Action', value: 'action' },
         ],
         items: [
@@ -136,45 +167,76 @@ const defaultState = () => {
                 margin: 'mx-auto'
             }
         },
-        date1: new Date().toISOString().substr(0, 10),
+        now: new Date().toISOString().substr(0, 10),
+        events:[
+            {
+                name: 'DXM-19-0807-0001',
+                start: '2019-10-22 09:00',
+                end: '2019-10-22 11:00',
+                color: 'blue'
+            },
+        ],
         arrayEvents: null
-    }
-}
+    }),
+    filters: {
+        getCurrentMonthText(value) {
+            if(value) {
+                let date = new Date(value)
+                let monthNumber = date.getMonth();
+                let year = date.getFullYear();
+    
+                const monthNames = ["January", "February", "March", "April", "May", "June",
+                    "July", "August", "September", "October", "November", "December"
+                ];
 
-//for testing purpose only
-export default {
-    data: defaultState,
+                return `${monthNames[monthNumber]}, ${year}`;
+            }
+
+            return null;
+        }
+    },
     methods: {
         async testAxios() {
             const data = await Repository.get('/test');
             console.log({data})
-        }
+        },
+        getEventColor(event) {
+            if(!event.color) {
+                return 'red';
+            }
+
+            return event.color;
+        },
+        nextMonth(){
+            this.$refs.calendar.next()
+        },
+        previousMonth(){
+            this.$refs.calendar.prev()
+        },
+        updateRange ({ start, end }) {
+            console.log({ start, end });
+            // You could load events from an outside source (like database) now that we have the start and end dates on the calendar
+            // this.start = start
+            // this.end = end
+
+        },
     },
     destroyed(){
         //defaultState();
     },
     mounted() {
-        this.testAxios();
+        // this.testAxios();
 
         EventBus.$off('passFilterDate');
         EventBus.$on('passFilterDate', (data)=> {
             console.log({data}, 'dashboard')
         });
 
-        console.log(this.date1)
-
         this.arrayEvents = [
             '2019-10-22',
             '2019-10-21',
             '2019-10-13',
         ]
-
-        // this.arrayEvents = [...Array(6)].map(() => {
-        //     const day = Math.floor(Math.random() * 30)
-        //     const d = new Date()
-        //     d.setDate(day)
-        //     return d.toISOString().substr(0, 10)
-        // })
     }
 }
 </script>

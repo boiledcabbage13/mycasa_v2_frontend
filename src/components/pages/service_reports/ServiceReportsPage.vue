@@ -26,6 +26,8 @@
                                 md="3"
                                 lg="3"
                                 xl="3"
+                                align="center"
+                                justify="center"
                             >
                                 <h4>TECHNICAL</h4>
                                 <v-icon color="yellow">mdi-star</v-icon>
@@ -36,6 +38,8 @@
                                 md="3"
                                 lg="3"
                                 xl="3"
+                                align="center"
+                                justify="center"
                             >
                                 <h4>CLEANLINESS</h4>
                                 <v-icon color="yellow">mdi-star</v-icon>
@@ -46,6 +50,8 @@
                                 md="3"
                                 lg="3"
                                 xl="3"
+                                align="center"
+                                justify="center"
                             >
                                 <h4>POLITENESS</h4>
                                 <v-icon color="yellow">mdi-star</v-icon>
@@ -56,6 +62,8 @@
                                 md="3"
                                 lg="3"
                                 xl="3"
+                                align="center"
+                                justify="center"
                             >
                                 <h4>VALUE FOR MONEY</h4>
                                 <v-icon color="yellow">mdi-star</v-icon>
@@ -77,7 +85,10 @@
                     </v-card-title>
                     <v-card-text>
                         <v-row>
-                            <v-col>
+                            <v-col
+                                align="center"
+                                justify="center"    
+                            >
                                 <v-icon color="primary">mdi-check-bold</v-icon>
                             </v-col>
                         </v-row>
