@@ -40,5 +40,10 @@ export default new Router({
       name: 'app-styles',
       component: () => import('./components/pages/AppStyles.vue')
     },
+    {
+      path: '/test-calendar',
+      name: 'test-calendar',
+      component: () => import('./components/pages/TestCalendar.vue')
+    },
   ]
 })

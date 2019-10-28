@@ -90,8 +90,9 @@
                         <v-col 
                             align="center"
                             justify="center"
+                            @click="calendarType = 'month'"
                         >
-                            <p class="text--bold text__title -size -nowrap"> {{ now | getCurrentMonthText }} </p>
+                            <p class="text--bold text__title -size -nowrap" style="cursor:pointer"> {{ now | getCurrentMonthText }} </p>
                         </v-col>
                         <v-col 
                             align="center"
@@ -113,9 +114,13 @@
                             :events="events"
                             :event-color="getEventColor"
                             color="primary"
-                            type="month"
+                            :type="calendarType"
                             @change="updateRange"
-                        />
+                            @click:more="showEventDay"
+                            event-more-text="test"
+                            event-name="test"
+                        >
+                        </v-calendar>
                     </v-sheet>
                 </v-card>  
             </v-col>
@@ -168,15 +173,26 @@ export default {
             }
         },
         now: new Date().toISOString().substr(0, 10),
+        calendarType: 'month',
         events:[
             {
-                name: 'DXM-19-0807-0001',
+                test:'<span class="delete-class">EDRICH</span>',
+                name:'edrich',
                 start: '2019-10-22 09:00',
-                end: '2019-10-22 11:00',
                 color: 'blue'
             },
+            // {
+            //     name:'',
+            //     start: '2019-10-22',
+            //     color: 'red'
+            // },
+            // {
+            //     name:'',
+            //     start: '2019-10-22',
+            //     color: 'pink'
+            // },
         ],
-        arrayEvents: null
+        arrayEvents: null,
     }),
     filters: {
         getCurrentMonthText(value) {
@@ -220,6 +236,10 @@ export default {
             // this.end = end
 
         },
+        showEventDay(event){
+            this.now = event.date;
+            this.calendarType = 'day';
+        }
     },
     destroyed(){
         //defaultState();
