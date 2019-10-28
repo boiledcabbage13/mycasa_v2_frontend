@@ -129,9 +129,6 @@
 </template>
 
 <script>
-
-import Repository from '@/repository';
-
 export default {
     data: () => ({
         pageTitle: 'Dashboard',

@@ -51,6 +51,10 @@
 </template>
 
 <script>
+import { RepositoryFactory } from "@/repositories/repositoryFactory";
+
+const adRepository = RepositoryFactory.get("ads");
+
 const CreateDialog = () => import('../ads_management/dialogs/CreateDialog.vue')
 
 export default {
@@ -84,6 +88,18 @@ export default {
                 icon: 'mdi-pencil'
             }
         }
-    })
+    }),
+    methods: {
+        getData(){
+            adRepository.get();
+            adRepository.create({id:1});
+            adRepository.update({id:1}, 1);
+            adRepository.getUsingId(1);
+            adRepository.getAll();
+        }
+    },
+    mounted() {
+        this.getData();
+    }
 }
 </script>

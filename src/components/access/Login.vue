@@ -32,6 +32,7 @@
 						<v-card-text>
 							<v-form>
 								<v-text-field
+									v-model="form.username"
 									label="Login"
 									name="login"
 									prepend-icon="mdi-account"
@@ -39,6 +40,7 @@
 								></v-text-field>
 
 								<v-text-field
+									v-model="form.password"
 									id="password"
 									label="Password"
 									name="password"
@@ -49,7 +51,7 @@
 						</v-card-text>
 						<v-card-actions>
 							<v-spacer></v-spacer>
-							<v-btn class="app-button--primary" @click="toDashboard()">Login</v-btn>
+							<v-btn class="app-button--primary" @click="login()">Login</v-btn>
 						</v-card-actions>
 					</v-card>
 				</v-col>
@@ -59,13 +61,19 @@
 </template>
 
 <script>
+import { RepositoryFactory } from "@/repositories/repositoryFactory";
+
+const userRepository = RepositoryFactory.get("user");
+
 export default {
 	data: () => ({
-		quote: "IT'S ABOUT TIME CAR MAINTENANCE BECAME CONVENIENT"
+		quote: "IT'S ABOUT TIME CAR MAINTENANCE BECAME CONVENIENT",
+		form: {}
 	}),
 	methods:{
-		toDashboard(){
-		this.$router.push('/dashboard');
+		login(){
+			userRepository.login(this.form)
+			this.$router.push('/dashboard');
 		}
 	}
 }

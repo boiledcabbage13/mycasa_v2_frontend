@@ -30,9 +30,12 @@
 </template>
 
 <script>
+import { RepositoryFactory } from "@/repositories/repositoryFactory";
 
-const defaultState = () => {
-    return {
+const userRepository = RepositoryFactory.get("user");
+
+export default {
+    data: () => ({
         pageTitle: 'Users',
         search: '',
         headers: [
@@ -44,14 +47,19 @@ const defaultState = () => {
           { text: 'Birthdate', value: 'birthdate' },
         ],
         items: [],
+    }),
+    methods: {
+        getData(){
+            userRepository.get();
+            userRepository.create({id:1});
+            userRepository.update({id:1}, 1);
+            userRepository.getUsingId(1);
+            userRepository.getAll();
+        }
+    },
+    mounted(){
+        this.getData();
     }
-}
-
-//for testing purpose only
-export default {
-    data: defaultState,
-    destroyed(){
-        //defaultState();
-    }
+   
 }
 </script>

@@ -48,6 +48,10 @@
 </template>
 
 <script>
+import { RepositoryFactory } from "@/repositories/repositoryFactory";
+
+const productRepository = RepositoryFactory.get("product");
+
 const CreateDialog = () => import('./dialogs/CreateDialog.vue') 
 
 export default {
@@ -74,6 +78,18 @@ export default {
                 icon: 'mdi-pencil'
             }
         }
-    })
+    }),
+    methods: {
+        getData(){
+            productRepository.get();
+            productRepository.create({id:1});
+            productRepository.update({id:1}, 1);
+            productRepository.getUsingId(1);
+            productRepository.getAll();
+        }
+    },
+    mounted(){
+        this.getData();
+    }
 }
 </script>

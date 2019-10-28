@@ -99,6 +99,10 @@
 </template>
 
 <script>
+import { RepositoryFactory } from "@/repositories/repositoryFactory";
+
+const userRepository = RepositoryFactory.get("user");
+
 const GenderSelectBox = () => import('../../miscellaneous/selects/GenderSelectBox.vue');
 const UpdatePasswordDialog = () => import('./dialogs/UpdatePasswordDialog.vue');
 const ConfirmUpdateProfileDialog = () => import('./dialogs/ConfirmUpdateProfileDialog.vue');
@@ -124,6 +128,8 @@ export default {
             }
         },
         testingUser(){
+            userRepository.getUsingId(1);
+
             this.form = {
                 firstName: 'Edrich',
                 lastName: 'Bonifacio',
