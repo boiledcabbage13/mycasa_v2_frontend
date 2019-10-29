@@ -74,6 +74,7 @@ export default {
         ],
         items: [
             {
+                id: 1,
                 email: 'technician@tech.com',
                 firstName: 'Tech',
                 lastName: 'Nician',
@@ -95,11 +96,11 @@ export default {
     }),
     methods: {
         getData(){
-            technicianRepository.get();
-            technicianRepository.create({id:1});
-            technicianRepository.update({id:1}, 1);
-            technicianRepository.getUsingId(1);
-            technicianRepository.getAll();
+            // technicianRepository.get();
+            // technicianRepository.create({id:1});
+            // technicianRepository.update({id:1}, 1);
+            // technicianRepository.getUsingId(1);
+            // technicianRepository.getAll();
         }
     },
     mounted(){
