@@ -20,7 +20,6 @@ export default {
         return Repository.get(`${resource}`);
     },
     login(payload) {
-        console.log({payload})
-        return Repository.post(`${resource}`, payload);
+        return Repository.post(`${resource}/login`, payload);
     }
 }

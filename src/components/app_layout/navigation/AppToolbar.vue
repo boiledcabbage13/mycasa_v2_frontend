@@ -20,7 +20,7 @@
         <v-btn icon @click="mixins_goToPage('/profile')">
             <v-icon>mdi-account-circle</v-icon>
         </v-btn>
-        <v-btn icon @click="mixins_goToPage('/')">
+        <v-btn icon @click="logout()">
             <v-icon>mdi-logout</v-icon>
         </v-btn>
     </v-app-bar>
@@ -29,8 +29,10 @@
 
 <script>
 import {NAVIGATION_DRAWER_EVENT_BUS} from './js/NavigationDrawerEventBus';
+import Storage from '@/storage.js';
 
 const AppSideBar = () => import('./AppSideBar.vue');
+let storage = new Storage();
 
 export default {
     components: {
@@ -51,6 +53,10 @@ export default {
             //this code is use to avoid double clicking to the side bar icon 
             //to toggle the navigation drawer
             this.showDrawer = await !value;
+        },
+        async logout() {
+            await storage.clear();
+            await this.mixins_goToPage('/');
         }
     }
 }

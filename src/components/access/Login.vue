@@ -52,6 +52,20 @@
 						<v-card-actions>
 							<v-spacer></v-spacer>
 							<v-btn class="app-button--primary" @click="login()">Login</v-btn>
+							<v-snackbar
+								v-model="snackbar.show"
+								:timeout="snackbar.timeout"
+								:color="snackbar.color"
+							>
+								{{ snackbar.text }}
+								<v-btn
+									:color="snackbar.button.color"
+									text
+									@click="snackbar.show = false"
+								>
+									Close
+								</v-btn>
+							</v-snackbar>
 						</v-card-actions>
 					</v-card>
 				</v-col>
@@ -62,19 +76,78 @@
 
 <script>
 import { RepositoryFactory } from "@/repositories/repositoryFactory";
+import Storage from '@/storage.js'
 
 const userRepository = RepositoryFactory.get("user");
+const storage = new Storage();
 
 export default {
 	data: () => ({
 		quote: "IT'S ABOUT TIME CAR MAINTENANCE BECAME CONVENIENT",
-		form: {}
+		form: {
+			username: 'test@test.com',
+			password: 'pass123$'
+		},
+		snackbar: {
+			show: false,
+			timeout: 2000,
+			text: '',
+			color: 'success',
+			button: {
+				color: 'black'
+			}
+		}
 	}),
 	methods:{
-		login(){
-			userRepository.login(this.form)
-			this.$router.push('/dashboard');
+		async login(){
+			await userRepository.login(this.form)
+			.then(async response => {
+				let { data : user } = await response;
+
+				if(user.token.accessToken) {
+					await storage.set('user', user, true);
+					await storage.set('authenticated', true);
+
+					this.snackbar = {
+						show: true,
+						timeout: 2000,
+						text: 'Successfully Log In.',
+						color: 'success',
+						button: {
+							color: 'black'
+						}
+					}
+					await this.mixins_goToPage('/dashboard');
+				} else {
+					alert('wrong')
+				}
+			})
+			.catch(error => {
+				console.log({error})
+				this.snackbar = {
+					show: true,
+					timeout: 2000,
+					text: 'Invalid Username or Password.',
+					color: 'error',
+					button: {
+						color: 'black'
+					}
+				}
+			})
+			// 
+		},
+		async checkIfLoggedIn(){
+			let authenticated = await storage.get('authenticated');
+
+			if(authenticated) {
+				await this.mixins_goToPage('/dashboard');
+			} else {
+				await this.mixins_goToPage('/');
+			}
 		}
+	},
+	mounted(){
+		this.checkIfLoggedIn();
 	}
 }
 </script>
