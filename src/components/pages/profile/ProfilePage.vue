@@ -15,6 +15,13 @@
                 <v-row>
                     <v-col
                         cols="12"
+                        class="col-sm-12 col-md-12 col-lg-12 col-xl-12"
+                    >
+                        <v-text-field v-model="form.fullname" label="Full Name" required :rules="requiredRules"></v-text-field>
+                    </v-col>
+                    
+                    <!-- <v-col
+                        cols="12"
                         class="col-sm-12 col-md-6 col-lg-6 col-xl-6"
                     >
                         <v-text-field v-model="form.firstName" label="First Name" required :rules="requiredRules"></v-text-field>
@@ -25,7 +32,7 @@
                         class="col-sm-12 col-md-6 col-lg-6 col-xl-6"
                     >
                         <v-text-field v-model="form.lastName" label="Last Name" required :rules="requiredRules"></v-text-field>
-                    </v-col>
+                    </v-col> -->
 
                     <v-col
                         cols="12"
@@ -100,8 +107,10 @@
 
 <script>
 import { RepositoryFactory } from "@/repositories/repositoryFactory";
+import Storage from '@/storage.js';
 
 const userRepository = RepositoryFactory.get("user");
+let storage = new Storage();
 
 const GenderSelectBox = () => import('../../miscellaneous/selects/GenderSelectBox.vue');
 const UpdatePasswordDialog = () => import('./dialogs/UpdatePasswordDialog.vue');
@@ -128,8 +137,6 @@ export default {
             }
         },
         testingUser(){
-            userRepository.getUsingId(1);
-
             this.form = {
                 firstName: 'Edrich',
                 lastName: 'Bonifacio',
@@ -142,10 +149,31 @@ export default {
                 address: 'Guadalupe',
                 password: 'password'
             }
+        },
+        async getUser() {
+            let user = await storage.get('user');
+            // console.log({user})
+            let { data } = await userRepository.getUsingId(user.id);
+            console.log({data});
+            console.log(data.information);
+
+            this.form =  {
+                fullname: data.information.fullname,
+                // lastName: 'Bonifacio',
+                gender: data.information.gender,
+                birthdate: data.information.birthdate,
+                email: data.email,
+                contactNumber: data.mobile_number,
+                // position: 'Developer',
+                branch: data.information.branch.name,
+                address: data.information.addresss,
+                // password: 'password'
+            }
         }
     },
     mounted(){
-        this.testingUser();
+        // this.testingUser();
+        this.getUser()
         // this.form.birthdate = new Date().toISOString().substr(0,10);
     }
 }
