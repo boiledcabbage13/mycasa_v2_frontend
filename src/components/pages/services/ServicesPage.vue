@@ -31,19 +31,35 @@
                         </v-row>
                     </v-card-title>
                     <v-data-table
+                        :loading="loading"
                         :headers="headers"
                         :items="items"
-                        :items-per-page="5"
                         class="elevation-1"
                         disable-sort
+                        :options.sync="options"
+                        :server-items-length="totalItems"
                     >
                         <template v-slot:item.action="{ item }">
-                            <create-dialog :button="editDialog.button" title="Edit Service" :form="item"></create-dialog>
+                            <create-dialog :button="editDialog.button" title="Edit Service" :form="item" :formId="item.id"></create-dialog>
                         </template>
                     </v-data-table>
                 </v-card>  
             </v-col>
         </v-row>
+        <v-snackbar
+            v-model="snackbar.show"
+            :timeout="snackbar.timeout"
+            :color="snackbar.color"
+        >
+            {{ snackbar.text }}
+            <v-btn
+                :color="snackbar.button.color"
+                text
+                @click="snackbar.show = false"
+            >
+                Close
+            </v-btn>
+        </v-snackbar>
     </v-container>
 </template>
 
@@ -51,7 +67,6 @@
 import { RepositoryFactory } from "@/repositories/repositoryFactory";
 
 const serviceRepository = RepositoryFactory.get("service");
-
 
 const CreateDialog = () => import('./dialogs/CreateDialog.vue') 
 
@@ -68,33 +83,78 @@ export default {
           { text: 'Category', value: 'category' },
           { text: 'Action', value: 'action' },
         ],
-        items: [
-            {
-                name: 'Change Oil',
-                price: 100,
-                category: 'Service',
-                title: 'Change the oil',
-                description: 'Replace oil.'
-            }
-        ],
+        items: [],
         editDialog:{
             button:{
                 isIcon: true,
                 icon: 'mdi-pencil'
             }
+        },
+        snackbar: {
+			show: false,
+			timeout: 2000,
+			text: '',
+			color: 'success',
+			button: {
+				color: 'black'
+			}
+        },
+        loading: false,
+        totalItems: 0,
+        options: {
+            itemsPerPage: 5
         }
     }),
+    watch: {
+        options: {
+            handler () {
+                this.getData();
+            },
+            deep: true
+        }
+    }, 
     methods: {
-        getData(){
-            serviceRepository.get();
-            serviceRepository.create({id:1});
-            serviceRepository.update({id:1}, 1);
-            serviceRepository.getUsingId(1);
-            serviceRepository.getAll();
+        async getData(){
+            this.loading = await true;
+
+            let limit = await this.setRequestLimit(this.options.itemsPerPage);
+
+            await serviceRepository.get({limit: limit, page: this.options.page})
+            .then(response => {
+                let {data : { data : items } } = response;
+
+                this.totalItems = response.data.total;
+
+                this.items = items;
+            })
+            .catch(error => {
+                console.log({error})
+            });
+            
+            this.loading = await false;
+        },
+        setRequestLimit(limit) {
+            if(limit <= 0) {
+                return this.totalItems;
+            }
+
+            return limit;
         }
     },
     mounted(){
-        this.getData();
+        EventBus.$on('loadData', (snackbarText) => {
+            this.snackbar = {
+                show: true,
+                timeout: 2000,
+                text: snackbarText,
+                color: 'success',
+                button: {
+                    color: 'black'
+                }
+            };
+
+            this.getData();
+        });
     }
 }
 </script>

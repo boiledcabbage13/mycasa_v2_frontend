@@ -1,6 +1,6 @@
 import Repository from '@/repository';
 
-const resource = 'services';
+const resource = 'partner-operators';
 // const limit = process.env.VUE_APP_SEARCH_LIMIT;
 
 export default {

@@ -15,13 +15,14 @@
             scrollable 
             max-width="50%"
         >
-            <create-form @closeDialog="closeDialog($event)" :title="title" :form="form"></create-form>
+            <create-form @closeDialog="closeDialog($event)" :title="title" :formId="formId"></create-form>
         </v-dialog>
     </div>
 </template>
 
 <script>
-const CreateForm = () => import('../forms/CreateForm.vue')
+const CreateForm = () => import('../forms/CreateForm.vue');
+
 export default {
     components: {
         CreateForm
@@ -46,13 +47,10 @@ export default {
             type: String,
             default: 'Create Technician'
         },
-        form: {
-            type: Object,
-            default: () => {
-                return {}
-            }
+        formId: {
+            type: Number,
+            default: 0
         }
-        
     },
     methods: {
         showDialog(){

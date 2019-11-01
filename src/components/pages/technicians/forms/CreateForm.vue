@@ -1,5 +1,5 @@
 <template>
-    <v-card class="card-custom" >
+    <v-card class="card-custom" :loading="loading">
         <v-card-title class="headline">{{title}}</v-card-title>
         <v-divider></v-divider>
         <v-card-text>
@@ -118,6 +118,10 @@
 </template>
 
 <script>
+import { RepositoryFactory } from "@/repositories/repositoryFactory";
+
+const technicianRepository = RepositoryFactory.get("technician");
+
 const GenderSelectBox = () => import('../../../miscellaneous/selects/GenderSelectBox.vue');
 
 export default {
@@ -126,10 +130,11 @@ export default {
     },
     data: () => ({
         valid: true,
-        // form:{},
+        form:{},
         requiredRules: [
             v => !!v || 'This field  is required',
-        ]
+        ],
+        loading: false
     }),
     props: {
         title: {
@@ -145,28 +150,78 @@ export default {
             type: String,
             default: 'closeDialog'
         },
-        form: {
-            type: Object,
-            required: true
+        formId: {
+            //check if form is use for create
+            //if not formId value should be the id that is used for the request
+            type: Number,
+            default: 0
         }
     },
     methods: {
-        submit() {
+        async submit() {
             if (this.$refs.form.validate()) {
-                console.log(this.form)
-                this.dialog = false;
-                this.$emit(this.eventName, this.dialog);
+                this.loading = await true;
+
+                let snackbarText = '';
+
+                if(this.formId) {
+                    snackbarText = 'Successfully Updated.';
+
+                    await this.update()
+                } else {
+                    snackbarText = 'Successfully Created.';
+
+                    await this.create();
+                }
+
+                this.loading = await false;
+
+                EventBus.$emit('loadData', snackbarText);
             }
+        },
+        async create() {
+            await technicianRepository.create(this.form)
+            .then( reponse => {
+                // setTimeout( () => {
+                    this.closeDialog();
+                // }, 1000);
+            })
+            .catch(error => {
+                console.log(error)
+            });
+        },
+        async update() {
+            await technicianRepository.update(this.form, this.formId)
+            .then( reponse => {
+                // setTimeout( () => {
+                    this.closeDialog();
+                // }, 1000);
+            })
+            .catch(error => {
+                console.log(error)
+            });
         },
         closeDialog() {
             this.dialog = false;
             this.$emit(this.eventName, this.dialog);
+        },
+        async checkEditView() {
+            //check if form is used for edit or view
+            this.loading = await true;
+
+            if (this.formId) {
+                let {data} = await technicianRepository.getUsingId(this.formId);
+
+                this.form = await data;
+            } else {
+                this.form = {}
+            }
+
+            this.loading = await false;
         }
     },
     mounted(){
-        if(!this.form.birthdate) {
-            this.form.birthdate = new Date().toISOString().substr(0,10);
-        }
-    },
+        this.checkEditView();
+    }
 }
 </script>

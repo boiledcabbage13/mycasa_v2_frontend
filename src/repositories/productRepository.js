@@ -1,11 +1,11 @@
 import Repository from '@/repository';
 
 const resource = 'products';
-const limit = process.env.VUE_APP_SEARCH_LIMIT;
+// const limit = process.env.VUE_APP_SEARCH_LIMIT;
 
 export default {
-    get(search='') {
-        return Repository.get(`${resource}?limit=${limit}&search=${search}`);
+    get({limit = process.env.VUE_APP_SEARCH_LIMIT, search= '', page= 1}) {
+        return Repository.get(`${resource}?limit=${limit}&search=${search}&page=${page}`);
     },
     create(payload) {
         return Repository.post(`${resource}`, payload);
